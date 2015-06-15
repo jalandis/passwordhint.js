@@ -53,8 +53,8 @@ var PasswordHint = {};
         return window.matchMedia('only screen and (max-width: 760px)').matches;
     };
 
-    PasswordHint.ignoreCharacter = function (charCode) {
-        return charCode === 0 || charCode === PasswordHint.keyCodes.enter;
+    PasswordHint.ignoreCharacter = function (event) {
+        return event.which === 0 || event.which === PasswordHint.keyCodes.enter || event.ctrlKey || event.ctrlAlt;
     };
 
     PasswordHint.getOption = function (options, property, defaultOption) {
@@ -85,7 +85,7 @@ var PasswordHint = {};
     };
 
     PasswordHint.handleKeypress = function (keypress) {
-        if (PasswordHint.ignoreCharacter(keypress.which)) {
+        if (PasswordHint.ignoreCharacter(keypress)) {
             return;
         }
 
@@ -124,8 +124,8 @@ var PasswordHint = {};
     };
 
     PasswordHint.handleKeydown = function (keydown) {
+        console.log(keydown.which);
         if (keydown.which === PasswordHint.keyCodes.backspace || keydown.which === PasswordHint.keyCodes.delete) {
-
             var passwordField = keydown.target,
                 hiddenPassword = document.getElementById(passwordField.id + '_secret'),
                 caretPosition = passwordField.selectionStart,

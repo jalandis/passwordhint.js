@@ -9,6 +9,7 @@ Mobile style password hints.
  - Backspace and delete both destroy any highlighted selection
  - Tab moves off field
  - Left, Right, Up, Down arrows => Left one character, right one character, start of string, end of string
+ - alt/ctrl keys are ignored
 
 ## Build
 Local gulp build tool.
@@ -39,6 +40,3 @@ Gulp Tasks:
 This library has been inadequately tested.  All scenarios have been run manually on whatever resources were available during development.
 
 ```node_modules/gulp/bin/gulp.js nightwatch:firefox```
-
-## Issues
- - CNTR-W should close browser
