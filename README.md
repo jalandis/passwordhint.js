@@ -39,4 +39,4 @@ Gulp Tasks:
 ## Testing
 This library has been inadequately tested.  All scenarios have been run manually on whatever resources were available during development.
 
-```node_modules/gulp/bin/gulp.js nightwatch:firefox```
+```node_modules/gulp/bin/gulp.js nightwatch --browser [chrome|firefox]```

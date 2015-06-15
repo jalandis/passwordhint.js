@@ -1,10 +1,10 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     browserSync = require('browser-sync'),
-    gutil = require('gulp-util'),
     download = require('gulp-download'),
     nightwatch = require('gulp-nightwatch'),
-    notify = require('gulp-notify');;
+    fs = require('fs'),
+    util = require('gulp-util');
 
 gulp.task('default', ['watch']);
 
@@ -25,9 +25,18 @@ gulp.task('compress', function () {
       .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('download-selenium', function(){
-  download('http://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar')
-    .pipe(gulp.dest('bin/'));
+gulp.task('download-selenium', function() {
+
+  if (!fs.existsSync('bin/selenium-server-standalone-2.46.0.jar')) {
+    download('http://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar')
+      .pipe(gulp.dest('bin/'));
+  }
+
+
+  if (!fs.existsSync('bin/chromedriver_linux64.zip')) {
+    download('http://chromedriver.storage.googleapis.com/2.16/chromedriver_linux64.zip')
+      .pipe(gulp.dest('bin/'));
+  }
 });
 
 gulp.task('nightwatch', function() {
@@ -37,7 +46,10 @@ gulp.task('nightwatch', function() {
     }));
 });
 
-gulp.task('nightwatch:firefox', function() {
+gulp.task('nightwatch', function() {
+
+  var browser = util.env.browser ? util.env.browser : 'firefox';
+
   browserSync.init({
     server: {
       baseDir: './build',
@@ -49,7 +61,7 @@ gulp.task('nightwatch:firefox', function() {
     .pipe(nightwatch({
       configFile: './tests/nightwatch.json',
       cliArgs: {
-        env: 'firefox',
+        env: browser,
         tag: 'password'
       }
     })).on('end', function () {
