@@ -5,11 +5,9 @@ module.exports = {
       .url('http://localhost:3000/')
       .waitForElementVisible('#password', 1000)
       .sendKeys('#password', 'Password1')
-      .pause(10000)
       .sendKeys('#password', browser.Keys.BACK_SPACE)
-      .pause(10000)
-      .assert.value('#password', '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF')
       .assert.value('#password_secret', 'Password')
+      .assert.value('#password', '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF')
       .end();
 
   },
@@ -39,8 +37,8 @@ module.exports = {
         browser.Keys.LEFT_ARROW + browser.Keys.LEFT_ARROW + browser.Keys.LEFT_ARROW
       )
       .sendKeys('#password', browser.Keys.BACK_SPACE)
-      .assert.value('#password', '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF')
       .assert.value('#password_secret', 'Passwrd1')
+      .assert.value('#password', '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF')
       .end();
   },
   'Backspace pressed while selecting a number of characters will remove selected characters' : function (browser) {
@@ -55,8 +53,8 @@ module.exports = {
         browser.Keys.LEFT_ARROW + browser.Keys.LEFT_ARROW + browser.Keys.LEFT_ARROW
       )
       .sendKeys('#password', browser.Keys.BACK_SPACE)
-      .assert.value('#password', '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF')
       .assert.value('#password_secret', 'Pasrd1')
+      .assert.value('#password', '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF')
       .end();
   }
 };
