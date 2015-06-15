@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Test Site for passwordhint.js Project</title>
+  <meta name="description" content="Test Site for passwordhint.js Project">
+  <meta name="author" content="John Landis">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <script src="js/passwordhint.js"></script>
+</head>
+
+<body>
+  <h1>Mobile Style Password Hinting</h1>
+
+  <form>
+    <input id="password" type="password"></input>
+    <div id="caps_warning" style="display: none;">CapsLock Detected</div>
+  </form>
+  <script type="text/javascript">
+
+    // This limits the test site to IE9 (IE8 >= supported technically)
+    document.addEventListener('DOMContentLoaded', function() {
+      PasswordHint.startHinting(document.getElementById('password'));
+      PasswordHint.capsLockWarning(document.getElementById('caps_warning'));
+    });
+  </script>
+</body>
+</html>
