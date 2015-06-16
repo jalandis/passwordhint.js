@@ -54,7 +54,8 @@ var PasswordHint = {};
     };
 
     PasswordHint.ignoreCharacter = function (event) {
-        return event.which === 0 || event.which === PasswordHint.keyCodes.enter || event.ctrlKey || event.ctrlAlt;
+        return event.which === 0 || event.which === PasswordHint.keyCodes.enter
+          || event.ctrlKey || event.ctrlAlt || event.which === PasswordHint.keyCodes.backspace;
     };
 
     PasswordHint.getOption = function (options, property, defaultOption) {
