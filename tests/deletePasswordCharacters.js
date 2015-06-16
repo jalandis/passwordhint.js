@@ -2,7 +2,7 @@ module.exports = {
   tags: ['delete', 'password'],
   'Delete pressed at end of string has no effect' : function (browser) {
     browser
-      .url('http://localhost:3000/')
+      .url('http://localhost:8000/')
       .waitForElementVisible('#password', 1000)
       .sendKeys('#password', 'Password1')
       .sendKeys('#password', browser.Keys.DELETE)
@@ -12,7 +12,7 @@ module.exports = {
   },
   'Delete pressed at start of string removes a single character' : function (browser) {
     browser
-      .url('http://localhost:3000/')
+      .url('http://localhost:8000/')
       .waitForElementVisible('#password', 1000)
       .sendKeys('#password', 'Password1')
       .sendKeys(
@@ -28,7 +28,7 @@ module.exports = {
   },
   'Delete pressed in middle of string removes a single character' : function (browser) {
     browser
-      .url('http://localhost:3000/')
+      .url('http://localhost:8000/')
       .waitForElementVisible('#password', 1000)
       .sendKeys('#password', 'Password1')
       .sendKeys(
@@ -42,7 +42,7 @@ module.exports = {
   },
   'Delete pressed while selecting a number of characters will remove selected characters' : function (browser) {
     browser
-      .url('http://localhost:3000/')
+      .url('http://localhost:8000/')
       .waitForElementVisible('#password', 1000)
       .sendKeys('#password', 'Password1')
       .sendKeys(

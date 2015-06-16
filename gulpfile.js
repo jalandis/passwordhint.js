@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     download = require('gulp-download'),
     nightwatch = require('gulp-nightwatch'),
     fs = require('fs'),
-    util = require('gulp-util');
+    util = require('gulp-util'),
+    webserver = require('gulp-webserver');
 
 gulp.task('default', ['watch']);
 
@@ -48,14 +49,11 @@ gulp.task('nightwatch', function() {
 
 gulp.task('nightwatch', function() {
 
-  var browser = util.env.browser ? util.env.browser : 'firefox';
+  var browser = util.env.browser ? util.env.browser : 'firefox',
+      serverStream;
 
-  browserSync.init({
-    server: {
-      baseDir: './build',
-      open: false
-    }
-  });
+  serverStream = gulp.src('./build')
+    .pipe(webserver());
 
   gulp.src('')
     .pipe(nightwatch({
@@ -65,6 +63,6 @@ gulp.task('nightwatch', function() {
         tag: 'password'
       }
     })).on('end', function () {
-      browserSync.exit();
+      serverStream.emit('kill');
     });
 });
