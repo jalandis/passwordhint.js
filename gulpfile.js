@@ -50,6 +50,7 @@ gulp.task('nightwatch', function() {
 gulp.task('nightwatch', function() {
 
   var browser = util.env.browser ? util.env.browser : 'firefox',
+      tag = util.env.tag ? util.env.tag : 'password',
       serverStream;
 
   serverStream = gulp.src('./build')
@@ -60,7 +61,7 @@ gulp.task('nightwatch', function() {
       configFile: './tests/nightwatch.json',
       cliArgs: {
         env: browser,
-        tag: 'password'
+        tag: tag
       }
     })).on('end', function () {
       serverStream.emit('kill');
