@@ -55,7 +55,7 @@ var PasswordHint = {};
 
     PasswordHint.ignoreCharacter = function (event) {
         return event.which === 0 || event.which === PasswordHint.keyCodes.enter
-          || event.ctrlKey || event.ctrlAlt || event.which === PasswordHint.keyCodes.backspace;
+          || event.ctrlKey || event.altKey || event.which === PasswordHint.keyCodes.backspace;
     };
 
     PasswordHint.getOption = function (options, property, defaultOption) {
@@ -125,7 +125,6 @@ var PasswordHint = {};
     };
 
     PasswordHint.handleKeydown = function (keydown) {
-        console.log(keydown.which);
         if (keydown.which === PasswordHint.keyCodes.backspace || keydown.which === PasswordHint.keyCodes.delete) {
             var passwordField = keydown.target,
                 hiddenPassword = document.getElementById(passwordField.id + '_secret'),
