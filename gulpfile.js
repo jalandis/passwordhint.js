@@ -58,7 +58,7 @@ gulp.task('nightwatch', function() {
 
   gulp.src('')
     .pipe(nightwatch({
-      configFile: './tests/nightwatch.json',
+      configFile: './tests/config/nightwatch.json',
       cliArgs: {
         env: browser,
         tag: tag
