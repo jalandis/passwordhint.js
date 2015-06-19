@@ -12,6 +12,8 @@ var PasswordHint = {};
     };
 
     PasswordHint.keyCodes = {
+        v : 118,
+        V : 86,
         enter: 13,
         delete: 46,
         backspace: 8,
@@ -56,6 +58,14 @@ var PasswordHint = {};
     PasswordHint.ignoreCharacter = function (event) {
         return event.which === 0 || event.which === PasswordHint.keyCodes.enter
           || event.ctrlKey || event.altKey || event.which === PasswordHint.keyCodes.backspace;
+    };
+
+    PasswordHint.detectCopyAndPaste = function (event) {
+        return (event.which === PasswordHint.keyCodes.v || event.which === PasswordHint.keyCodes.V) && event.ctrlKey;
+    };
+
+    PasswordHint.detectDelete = function (event) {
+        return event.which === PasswordHint.keyCodes.backspace || event.which === PasswordHint.keyCodes.delete;
     };
 
     PasswordHint.getOption = function (options, property, defaultOption) {
@@ -125,7 +135,13 @@ var PasswordHint = {};
     };
 
     PasswordHint.handleKeydown = function (keydown) {
-        if (keydown.which === PasswordHint.keyCodes.backspace || keydown.which === PasswordHint.keyCodes.delete) {
+        if(PasswordHint.detectCopyAndPaste(keydown)) {
+
+          // Unable to handle copy/paste with any reliability
+          keydown.preventDefault();
+        }
+
+        if (PasswordHint.detectDelete(keydown)) {
             var passwordField = keydown.target,
                 hiddenPassword = document.getElementById(passwordField.id + '_secret'),
                 caretPosition = passwordField.selectionStart,
@@ -171,6 +187,7 @@ var PasswordHint = {};
         hiddenPassword.id = passwordField.id + '_secret';
         hiddenPassword.style.display = 'none';
         passwordField.type = 'text';
+        passwordField.autocomplete = 'off';
 
         passwordField.parentNode.appendChild(hiddenPassword);
 
