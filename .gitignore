@@ -3,3 +3,4 @@ build/*
 logs/*
 bin/*
 !build/index.html
+!build/css/styles.css

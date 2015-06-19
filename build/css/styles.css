@@ -1,0 +1,12 @@
+.form-block {
+  margin: 10px;
+}
+
+.form-block label {
+  display: inline-block;
+  width: 100px;
+}
+
+#caps_warning {
+  display: none;
+}
